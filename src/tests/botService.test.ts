@@ -61,9 +61,14 @@ describe('botService', () => {
         'Yes, we ship worldwide. Shipping costs vary by destination.',
       );
 
-      // Check that findFirst was called with the correct query
+      // Checking that findFirst was called with the correct query
       expect(prisma.fAQ.findFirst).toHaveBeenCalledWith({
-        where: { question: 'do you ship internationally?' },
+        where: {
+          question: {
+            equals: 'do you ship internationally?',
+            mode: 'insensitive',
+          },
+        },
       });
     });
 
@@ -92,9 +97,17 @@ describe('botService', () => {
       );
 
       expect(response).toBe('This is a fallback response from OpenAI.');
+
+      // Checking that findFirst was called with the correct query
       expect(prisma.fAQ.findFirst).toHaveBeenCalledWith({
-        where: { question: 'random query' },
+        where: {
+          question: {
+            equals: 'random query',
+            mode: 'insensitive',
+          },
+        },
       });
+
       expect(openaiCreateMock).toHaveBeenCalled();
     });
   });
