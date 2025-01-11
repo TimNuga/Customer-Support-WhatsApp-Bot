@@ -1,15 +1,29 @@
 import qrcode from 'qrcode-terminal';
 import { Client, LocalAuth } from 'whatsapp-web.js';
 import botService from './services/botService';
+import qrcodeLib from 'qrcode';
 
 // Use LocalAuth so session persists locally
 const client = new Client({
   authStrategy: new LocalAuth(),
 });
 
+export let lastQrImage: string | null = null;
+
 // Generate QR Code for login
-client.on('qr', (qr: string) => {
-  qrcode.generate(qr, { small: true });
+client.on('qr', (qrString: string) => {
+  // Generating terminal QR
+  qrcode.generate(qrString, { small: true });
+
+  // Storing a data URL so it can be displayed in the browser
+  qrcodeLib
+    .toDataURL(qrString)
+    .then((dataUrl) => {
+      lastQrImage = dataUrl;
+    })
+    .catch((err) => {
+      console.error('Error generating QR for browser:', err);
+    });
 });
 
 // Notify when ready

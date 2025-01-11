@@ -37,7 +37,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FAQ'
-  
+
   /api/faqs/{id}:
     get:
       summary: Get a FAQ by ID
@@ -198,6 +198,35 @@ paths:
         '404':
           description: Log not found
 
+  /api/qrcode:
+    get:
+      summary: Retrieve WhatsApp QR Code Page
+      description: Returns an HTML page containing the WhatsApp QR code for login.
+      responses:
+        '200':
+          description: HTML page with QR code
+          content:
+            text/html:
+              schema:
+                type: string
+                example: |
+                  <!DOCTYPE html>
+                  <html>
+                  <head>
+                    <title>WhatsApp QR Code</title>
+                  </head>
+                  <body>
+                    <h1>Scan this QR Code to log in:</h1>
+                    <img src="data:image/png;base64,..." alt="WhatsApp QR Code" />
+                  </body>
+                  </html>
+        '500':
+          description: Error generating or retrieving the QR code
+          content:
+            text/plain:
+              schema:
+                type: string
+
 components:
   schemas:
     FAQ:
@@ -227,6 +256,6 @@ components:
           type: string
         botResponse:
           type: string
-        createdAt:  
+        createdAt:
           type: string
           format: date-time

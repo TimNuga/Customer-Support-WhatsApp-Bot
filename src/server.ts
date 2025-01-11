@@ -6,6 +6,7 @@ import YAML from 'yamljs';
 
 import faqRoutes from './routes/faqRoutes';
 import logRoutes from './routes/logRoutes';
+import qrRoutes from './routes/qrRoutes';
 import './whatsapp';
 
 // Load Swagger API documentation
@@ -18,15 +19,15 @@ app.use(cors());
 // Swagger API documentation
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
 // Simple health check
 app.get('/', (req: Request, res: Response) => {
   res.send('Customer Support WhatsApp Bot API is running.');
 });
 
-// Register routes ß
+// Register routes
 app.use('/api/faqs', faqRoutes);
 app.use('/api/logs', logRoutes);
+app.use('/api/qrcode', qrRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 4000;
