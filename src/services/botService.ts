@@ -84,7 +84,12 @@ async function searchFAQ(query: string): Promise<string | null> {
   // For simplicity, do an exact match on question
   // Adjust or add full-text search if you want
   const faq = await prisma.fAQ.findFirst({
-    where: { question: query },
+    where: {
+      question: {
+        equals: query,
+        mode: 'insensitive',
+      },
+    },
   });
   return faq ? faq.answer : null;
 }
