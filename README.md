@@ -108,3 +108,5 @@ npm run test
 ## Swagger Documentation
 I used [https://www.npmjs.com/package/swagger-ui-express](swagger-ui-express) and OpenAPI-specification to document the endpoints. See [https://chatgpt.com/g/g-p-678127eab30081918af2c6f22c72556e-customer-support-bot/c/678127fc-726c-800d-9312-e5b18fa06306#swagger-documentation](Swagger-Documentation) for setup instructions.
 
+## QR Code:
+![alt text](image.png)
