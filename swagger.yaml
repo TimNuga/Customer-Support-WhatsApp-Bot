@@ -1,0 +1,232 @@
+openapi: '3.0.0'
+info:
+  title: Customer Support Bot API
+  version: '1.0.0'
+servers:
+  - url: http://localhost:4000
+    description: Development server
+paths:
+  /api/faqs:
+    get:
+      summary: Get all FAQs
+      tags:
+        - FAQs
+      responses:
+        '200':
+          description: Returns a list of FAQs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FAQ'
+    post:
+      summary: Create a new FAQ
+      tags:
+        - FAQs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FAQ'
+      responses:
+        '201':
+          description: Returns the newly created FAQ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQ'
+  
+  /api/faqs/{id}:
+    get:
+      summary: Get a FAQ by ID
+      tags:
+        - FAQs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: FAQ ID
+      responses:
+        '200':
+          description: Returns a single FAQ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQ'
+        '404':
+          description: FAQ not found
+    put:
+      summary: Update a FAQ by ID
+      tags:
+        - FAQs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: FAQ ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FAQ'
+      responses:
+        '200':
+          description: Returns the updated FAQ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FAQ'
+        '404':
+          description: FAQ not found
+    delete:
+      summary: Delete a FAQ by ID
+      tags:
+        - FAQs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: FAQ ID
+      responses:
+        '204':
+          description: FAQ deleted
+        '404':
+          description: FAQ not found
+
+  /api/logs:
+    get:
+      summary: Get all logs
+      tags:
+        - Logs
+      responses:
+        '200':
+          description: Returns a list of logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LOG'
+    post:
+      summary: Create a new log
+      tags:
+        - Logs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LOG'
+      responses:
+        '201':
+          description: Returns the newly created log
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LOG'
+
+  /api/logs/{id}:
+    get:
+      summary: Get a log by ID
+      tags:
+        - Logs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: Log ID
+      responses:
+        '200':
+          description: Returns a single log
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LOG'
+        '404':
+          description: Log not found
+    put:
+      summary: Update a log by ID
+      tags:
+        - Logs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: Log ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LOG'
+      responses:
+        '200':
+          description: Returns the updated log
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LOG'
+        '404':
+          description: Log not found
+    delete:
+      summary: Delete a log by ID
+      tags:
+        - Logs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: Log ID
+      responses:
+        '204':
+          description: Log deleted
+        '404':
+          description: Log not found
+
+components:
+  schemas:
+    FAQ:
+      type: object
+      properties:
+        id:
+          type: number
+        question:
+          type: string
+        answer:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    LOG:
+      type: object
+      properties:
+        id:
+          type: number
+        userName:
+          type: string
+        userQuery:
+          type: string
+        botResponse:
+          type: string
+        createdAt:  
+          type: string
+          format: date-time
