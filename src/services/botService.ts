@@ -65,7 +65,7 @@ async function handleMessage(
           {
             role: 'system',
             content:
-              'You are a helpful assistant that serves as a customer support chatbot, answering business related questions not currently catered for as best you can.',
+              'You are a helpful assistant that serves as a customer support chatbot, answering business related questions not currently catered for as best you can, while maintaining basic interaction principles.',
           },
           { role: 'user', content: userQuery },
         ],
@@ -81,8 +81,6 @@ async function handleMessage(
 }
 
 async function searchFAQ(query: string): Promise<string | null> {
-  // For simplicity, do an exact match on question
-  // Adjust or add full-text search if you want
   const faq = await prisma.fAQ.findFirst({
     where: {
       question: {

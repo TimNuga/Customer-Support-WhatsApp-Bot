@@ -29,7 +29,7 @@ app.use('/api/faqs', faqRoutes);
 app.use('/api/logs', logRoutes);
 app.use('/api/qrcode', qrRoutes);
 
-// Start the server
+// Starting the server
 const PORT = process.env.PORT || 4000;
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
